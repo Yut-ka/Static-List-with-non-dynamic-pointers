@@ -2,4 +2,4 @@
   Main.cpp
 C:\Users\danil\source\repos\SAOD_LAB3_3\menuconsolekey\Main.cpp(131): warning C4715: menu: значение возвращается не при всех путях выполнения
 C:\Users\danil\source\repos\SAOD_LAB3_3\menuconsolekey\Main.cpp(191): warning C4715: text: значение возвращается не при всех путях выполнения
-  123.vcxproj -> C:\Users\danil\Source\Repos\SAOD_LAB3_3\x64\Debug\SAOD_LAB3_3.exe
+  123.vcxproj -> C:\Users\danil\source\repos\SAOD_LAB3_3\x64\Debug\SAOD_LAB3_3.exe

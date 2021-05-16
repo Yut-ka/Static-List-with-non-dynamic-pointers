@@ -24,13 +24,14 @@ public:
 
 	int Push_after(Stat_List* list, int t, int inf) {
 		if (list->cout >= ARRAY_SIZE - 1) return 2;
-		if (t < ARRAY_SIZE-1 && t >= 0 && t<=list->cout) {
+		if (t >= 0) {
 			int j;
 			for (int i = 1; i < ARRAY_SIZE; i++) {
 				if (list->Array[i].next == -1) { j = i; break; }
 			}
 			TList_Item* pCurrent = &list->Array[0];
 			for (int i = 0; i < t; i++) {
+				if (pCurrent->next == NULL) return 0;
 				pCurrent = &list->Array[pCurrent->next];
 			}
 			list->Array[j].next = pCurrent->next;
@@ -43,7 +44,7 @@ public:
 	}
 	int Push_before(Stat_List* list, int t, int inf) {
 		if (list->cout >= ARRAY_SIZE - 1) return 2;
-		if (t < ARRAY_SIZE - 1 && t >= 1 && t<=list->cout) {
+		if (t >= 1) {
 			int j;
 			for (int i = 1; i < ARRAY_SIZE; i++) {
 				if (list->Array[i].next == -1) { j = i; break; }
@@ -51,6 +52,7 @@ public:
 			TList_Item* pCurrent = &list->Array[0];
 			TList_Item* pPred = &list->Array[0];
 			for (int i = 0; i < t; i++) {
+				if (pCurrent->next == NULL) return 0;
 				pPred = pCurrent;
 				pCurrent = &list->Array[pCurrent->next];
 			}
@@ -62,22 +64,23 @@ public:
 		}
 		return 0;
 	}
-	int Delete(Stat_List* list, int t) {
-		if (list->cout == 0) return 2;
-		if (t < ARRAY_SIZE && t >= 1 && t<=list->cout) {
-			TList_Item* pCurrent = &list->Array[0];
-			TList_Item* pPred = &list->Array[0];
-			for (int i = 0; i < t; i++) {
-				pPred = pCurrent;
-				pCurrent = &list->Array[pCurrent->next];
+
+	int Delete(Stat_List* list, int inf) {
+		TList_Item* pCurrent = &list->Array[0];
+		TList_Item* pPred = &list->Array[0];
+		for (int i = 0; i < list->cout; i++) {
+			pPred = pCurrent;
+			pCurrent = &list->Array[pCurrent->next];
+			if (pCurrent->inf == inf) {
+				pPred->next = pCurrent->next;
+				pCurrent->next = -1;
+				list->cout--;
+				return 1;
 			}
-			pPred->next = pCurrent->next;
-			pCurrent->next = -1;
-			list->cout--;
-			return pCurrent->inf;
 		}
 		return 0;
 	}
+
 	int Get(Stat_List* list, int inf) {
 		TList_Item pCurrent = list->Array[0];
 		TList_Item pPred = list->Array[0];
